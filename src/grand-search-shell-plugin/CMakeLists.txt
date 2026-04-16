@@ -25,6 +25,7 @@ add_library(dock-searchitem SHARED ${SRCS})
 
 target_link_libraries(dock-searchitem PRIVATE
     Dde::Shell
+    Dde::ShellDock
 )
 
 ds_install_package(PACKAGE org.deepin.ds.dock.searchitem TARGET dock-searchitem)

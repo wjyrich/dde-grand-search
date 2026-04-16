@@ -30,8 +30,7 @@ static DDBusSender searchDbus()
 }
 
 SearchItem::SearchItem(QObject *parent)
-    : DApplet(parent)
-    , m_visible(true)
+    : DAppletDock(parent)
     , m_grandSearchVisible(false)
 {
     qCDebug(logShell) << "Grand Search shell plugin initialized";
@@ -49,17 +48,17 @@ void SearchItem::toggleGrandSearchConfig()
     QProcess::startDetached("dde-grand-search", QStringList() << "--setting");
 }
 
-void SearchItem::setVisible(bool visible)
+DockItemInfo SearchItem::dockItemInfo()
 {
-    qCDebug(logShell) << "Setting shell plugin visibility - From:" << m_visible << "To:" << visible;
-
-    if (m_visible != visible) {
-        m_visible = visible;
-
-        Q_EMIT visibleChanged(visible);
-    }
+    DockItemInfo info;
+    info.name = "searchItem";
+    info.displayName = tr("Search item");
+    info.itemKey = "searchItem";
+    info.settingKey = "searchItem";
+    info.visible = visible();
+    info.dccIcon = "search-view.svg";
+    return info;
 }
-
 void SearchItem::onGrandSearchVisibleChanged(bool visible)
 {
     qCDebug(logShell) << "Grand Search visibility change notification received - From:" << m_grandSearchVisible << "To:" << visible;

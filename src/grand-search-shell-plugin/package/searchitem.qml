@@ -8,17 +8,10 @@ import QtQuick.Controls 2.15
 import org.deepin.ds 1.0
 import org.deepin.dtk 1.0 as D
 import org.deepin.ds.dock 1.0
-
 import Qt.labs.platform 1.1 as LP
 
-AppletItem {
-    property bool useColumnLayout: Panel.position % 2
-    property int dockOrder: Panel.itemAlignment === Dock.CenterAlignment ? 5 : 14
-    property bool shouldVisible: Applet.visible
-    // 1:4 the distance between app : dock height; get width/height≈0.8
-    implicitWidth: useColumnLayout ? Panel.rootObject.dockSize : Panel.rootObject.dockItemMaxSize * 0.8
-    implicitHeight: useColumnLayout ? Panel.rootObject.dockItemMaxSize * 0.8 : Panel.rootObject.dockSize
-
+AppletDockItem {
+    dockOrder: Panel.itemAlignment === Dock.CenterAlignment ? 5 : 14
     PanelToolTip {
         id: toolTip
         text: qsTr("GrandSearch")
